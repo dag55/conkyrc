@@ -1,0 +1,124 @@
+###################################################################################################
+#
+#	Author: Dmitrii Glukhov
+#
+###################################################################################################
+
+
+###################################################################################################
+#	Settings
+###################################################################################################
+alignment top_right
+background yes
+border_width 1
+cpu_avg_samples 2
+color1 ff6600
+default_color lightblue
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades yes
+default_shade_color black
+use_xft yes
+xftfont DejaVu Sans Mono:size=8
+gap_x 15
+gap_y 60
+minimum_size 5 5
+net_avg_samples 2
+no_buffers yes
+out_to_console no
+out_to_stderr no
+extra_newline no
+own_window yes
+own_window_class Conky
+own_window_type desktop
+own_window_transparent yes
+own_window_argb_visual yes
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+stippled_borders 0
+update_interval 1
+update_interval_on_battery 5
+uppercase no
+use_spacer none
+show_graph_scale no
+show_graph_range no
+double_buffer
+override_utf8_locale yes
+
+
+###################################################################################################
+#	Time and Weather
+###################################################################################################
+TEXT
+${font weight=bold:size=9}${time %A, %d %B %Y, %H:%M}${font}
+
+###################################################################################################
+#	System Info
+###################################################################################################
+${font weight=bold:size=9}СИСТЕМА${font}
+   Пользователь: ${user_names}
+   Компьютер: ${nodename} ${alignr}Время работы: ${uptime}
+   OC: ${sysname}${alignr}Ядро:${kernel}
+
+###################################################################################################
+#	Laptop Battery (if exist)
+###################################################################################################
+${if_smapi_bat_installed 0}${font weight=bold:size=9}БАТАРЕЯ${font}
+   Заряд: ${battery}, ${if_match ${battery_percent} > 10}запас заряда на ${battery_time}${else}${color red}${blink запас заряда на ${battery_time}}${color}${endif}
+   ${battery_bar 5}
+${endif}
+###################################################################################################
+#	CPU Info
+###################################################################################################
+${font weight=bold:size=9}ПРОЦЕССОР ${execi 100 cat /proc/cpuinfo | grep "model name" -m1 | cut -d ":" -f2 | cut -d " " -f2-}${font}
+   ${freq cpu0}MHz Исп.: ${cpu cpu0}% ${alignr}${freq cpu1}MHz Исп.: ${cpu cpu1}%
+   ${cpugraph cpu0 25,125 ffff00 ff6600 -l} ${alignr}${cpugraph cpu0 25,125 ffff00 ff6600 -l}
+   ${freq cpu2}MHz Исп.: ${cpu cpu2}% ${alignr}${freq cpu3}MHz Исп.: ${cpu cpu3}%
+   ${cpugraph cpu2 25,125 ffff00 ff6600 -l} ${alignr}${cpugraph cpu3 25,125 ffff00 ff6600 -l}
+   Процессы: ${running_processes}/${processes}  ${alignr}Потоки: ${running_threads}/${threads}
+   ${hr}
+   Название              ${alignr}ИД	 	    ${alignr}ЦП%	 	${alignr}Пам%
+   1. ${top name 1}     ${alignr}${top pid 1}   ${alignr}${top cpu 1}	${alignr}${top mem 1}
+   2. ${top name 2}     ${alignr}${top pid 2}   ${alignr}${top cpu 2}	${alignr}${top mem 2}
+   3. ${top name 3}     ${alignr}${top pid 3}   ${alignr}${top cpu 3}	${alignr}${top mem 3}
+   ${hr}
+
+###################################################################################################
+#	RAM Info
+###################################################################################################
+${font weight=bold:size=9}ПАМЯТЬ${font}
+   Использовано:${alignr}${mem}/${memmax} - ${memperc}%
+   ${membar 5}
+   Раздел подкачки:${alignr}${swap}/${swapmax} - ${swapperc}%
+   ${swapbar 5}
+
+###################################################################################################
+#	HDD Info
+###################################################################################################
+${font weight=bold:size=9}ДИСКОВОЕ ПРОСТРАНСТВО${font}
+   / ${alignr}${fs_used /}/${fs_size /} - ${fs_used_perc /}%
+   ${fs_bar 5 /}
+   /home ${alignr}${fs_used /home}/${fs_size /home} - ${fs_used_perc /home}%
+   ${fs_bar 5 /home}
+   /mnt/hdd500	${alignr}${fs_used /mnt/hdd500}/${fs_size /mnt/hdd500} - ${fs_used_perc /mnt/hdd500}%
+   ${fs_bar 5 /mnt/hdd500}
+   Операции чтения/записи: 
+   ${diskiograph 25,325 ffff00 ff6600 -l}
+
+###################################################################################################
+#	Networks Info
+###################################################################################################
+${font weight=bold:size=9}СЕТЬ${font} - Внешний IP: ${execi 100 wget http://checkip.dyndns.org/ -q -O - | grep -Eo '\<[[:digit:]]{1,3}(\.[[:digit:]]{1,3}){3}\>'}
+   ${if_up enp3s0}Ethernet (IP: ${addr enp3s0})
+   Исходящая: ${upspeed enp3s0}/s ${alignr}Входящая: ${downspeed enp3s0}/s
+   ${upspeedgraph enp3s0 25,125 ffff00 ff6600 -l} ${alignr}${downspeedgraph enp3s0 25,125 ffff00 ff6600 -l}
+   Отправлено: ${totalup enp3s0} ${alignr}Получено: ${totaldown enp3s0}
+   ${endif}
+   ${if_up wlan0}Wi-Fi (IP: ${addr wlan0})
+   Точка доступа:${wireless_essid} ${alignr}Режим работы: ${wireless_mode}
+   Скорость: ${wireless_bitrate} ${alignr}Cигнал: ${wireless_link_qual_perc wlan0}%
+   MAC-адрес точки доступа: ${wireless_ap}
+   Исходящая: ${upspeed wlan0}/s ${alignr}Входящая: ${downspeed wlan0}/s
+   ${upspeedgraph wlan0 25,125 ffff00 ff6600 -l} ${alignr}${downspeedgraph wlan0 25,125 ffff00 ff6600 -l}
+   Отправлено: ${totalup wlan0} ${alignr}Получено: ${totaldown wlan0}
+   ${endif}
