@@ -45,13 +45,13 @@ conky.config = {
     default_color = '#cad3f5',          -- text
     default_shade_color = '#181926',    -- crust
 
-        
     -- Fonts
     use_xft = true,
     font = 'Fira Code Nerd Font Propo:size=8',
     xftalpha = 1,
     override_utf8_locale = true,
-    uppercase = false    
+    uppercase = false
+
 };
 
 conky.text = [[
