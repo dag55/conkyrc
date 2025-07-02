@@ -1,0 +1,79 @@
+{
+    "modules-right": [
+	    "tray",
+	    "hyprland/language",
+        "backlight",
+	    "pulseaudio",
+	    "bluetooth",
+	    "network",
+        "power-profiles-daemon",
+	    "battery"
+    ],
+        
+    "hyprland/language": {
+	    "format": "{short}",
+	    "on-click": "hyprctl switchxkblayout at-translated-set-2-keyboard next"
+    },
+
+    "tray": {
+        "spacing": 10
+    },
+
+    "backlight": {
+        "format": "{icon} {percent}%",
+        "format-icons": ["󱩎", "󱩏", "󱩐", "󱩑", "󱩒", "󱩓", "󱩔", "󱩕", "󱩖", "󰛨"],
+        "tooltip": false
+    },
+    
+    "battery": {
+        "states": {
+            "critical": 10
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-icons": ["", "", "", "", ""],
+        "tooltip": false
+    },
+    
+    "bluetooth": {
+	    "format": "",
+	    "format-disabled": "󰂲", 
+	    "format-connected": ": {num_connections}",
+	    "tooltip-format": "{controller_alias} ({controller_address})\nStatus: {status}",
+	    "tooltip-format-connected": "{controller_alias} ({controller_address})\n\n{num_connections} connected:\n{device_enumerate}",
+	    "tooltip-format-connected-battery": "{controller_alias} ({controller_address})\n\n{num_connections} connected:\n{device_enumerate}",
+	    "tooltip-format-enumerate-connected-battery": "{device_alias} ({device_address})\t {device_battery_percentage}%"
+    },
+
+    "network": {
+        "format-wifi": "󰖩",
+        "format-ethernet": "󰈀",
+        "format-linked": "󰈀 {ifname} (no ip)",
+        "format-disconnected": "󱛅 ",
+        "format-disabled": "󰖪 ",
+        "tooltip-format-wifi": "SSID: {essid}\nFrequency: {frequency}GHz\nSignal: {signalStrength}% ({signaldBm}dBm)\n{ifname}: {ipaddr}/{cidr}\ngateway: {gwaddr}",
+        "tooltip-format-ethernet": "{ifname}: {ipaddr}/{cidr}\ngateway: {gwaddr}"
+    },
+
+    "pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "{icon} {volume}% {format_source}",
+        "format-bluetooth": "{icon}  {volume}% {format_source}",
+        "format-bluetooth-muted": "{icon}  󰖁 {format_source}",
+        "format-muted": "󰖁 {format_source}",
+        "format-source": "󰍬 {volume}%",
+        "format-source-muted": "󰍭",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    } 
+}
+

@@ -1,0 +1,94 @@
+@import 'themes/macchiato.css';
+
+* {
+    color: @text;
+    min-height: 26px;
+    margin: 0px 0px;
+    padding: 0px 0px;
+    border: none;
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: FiraCodeNerdFontPropo;
+}
+
+window#waybar {
+    background-color: @base;
+}
+
+button:hover {
+  box-shadow: none;
+  text-shadow: none;
+  background: none;
+  transition: none;
+}
+
+tooltip {
+    text-shadow: none;
+    background-color: @mantle;
+}
+
+#backlight,
+#battery,
+#battery.charging,
+#battery.plugged,
+#bluetooth,
+#clock,
+#cpu,
+#language,
+#memory,
+#mpd,
+#network,
+#pulseaudio,
+#scratchpad,
+#temperature,
+#tray {
+    padding: 0px 7px;
+}
+
+#battery.critical:not(.charging) {
+    color: @red;
+}
+
+*.disabled,
+*.muted {
+    color: @surface2;
+}
+
+#scratchpad {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+#workspaces {
+    padding: 0px 0px;
+    margin-left: 5px;
+}
+
+#workspaces button {
+    margin: 0px 5px;
+    border-radius: 0px;
+}
+
+#workspaces button.empty {
+    color: @surface2;
+}
+
+#workspaces button.visible {
+    color: @blue;
+}
+
+#workspaces button.active {
+    color: @green;
+    box-shadow: inset 0 -2px @green;
+}
+
+#workspaces button.urgent {
+    color: @red;
+    box-shadow: inset 0 -2px @red;
+}
+
+#workspaces button:hover {
+    color: @surface1;
+    border: none;
+}
+

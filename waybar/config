@@ -1,0 +1,15 @@
+{
+    "layer": "top",
+    "margin-top": 5,
+    "margin-bottom": 0,
+    "position": "top",
+    "width": 1346,
+    "spacing": 2,
+
+    "include": [
+        "~/.config/waybar/modules/modules-left.json",
+        "~/.config/waybar/modules/modules-center.json",
+        "~/.config/waybar/modules/modules-right.json"
+    ]
+}
+
